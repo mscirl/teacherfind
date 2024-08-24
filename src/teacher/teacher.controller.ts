@@ -13,9 +13,9 @@ createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
 
 @Get()
 async getAllTeachers(
-    @Query('location') location: string,
-    @Query('theme') theme: string): Promise<CreateTeacherDto[]>{
+    @Query('location') location?: string,
+    @Query('theme') theme?: string): Promise<CreateTeacherDto[]> {
     const teachers = await this.teacherService.findAll(location, theme);
     return teachers;
-    }
+}
 }

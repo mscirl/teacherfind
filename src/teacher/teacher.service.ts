@@ -23,8 +23,12 @@ export class TeacherService {
     }
 
     
-    async findAll(location: string, theme: string): Promise<CreateTeacherDto[]> {
-        return this.teachers.filter(teacher => teacher.specialties.includes(theme) && teacher.cep === location);
+    async findAll(location?: string, theme?: string): Promise<CreateTeacherDto[]> {
+        if (location && theme) {
+            return this.teachers.filter(teacher =>
+                teacher.specialties.includes(theme) && teacher.cep === location
+            );
+        }
+        return this.teachers;
     }
-
 }
