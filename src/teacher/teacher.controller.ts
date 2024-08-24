@@ -6,7 +6,7 @@ import { TeacherService } from './teacher.service';
 export class TeacherController {
     constructor(private readonly teacherService: TeacherService) {}
 
-@Post()
+@Post('create')
 createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
     return this.teacherService.createTeacher(createTeacherDto);
 }
