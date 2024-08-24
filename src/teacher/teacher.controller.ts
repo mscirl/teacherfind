@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { CreateTeacherDto } from './teacher.dto';
+import { CreateTeacherDto } from '../dtos/teacher.dto';
 import { TeacherService } from './teacher.service';
 
 @Controller('teachers')

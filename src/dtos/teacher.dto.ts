@@ -1,13 +1,8 @@
 import { IsArray, IsDateString, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateTeacherDto {
-
 @IsString()
-@IsNotEmpty()
-id: string;
-
-@IsString()
-@IsNotEmpty()
+@IsNotEmpty( {message: 'Informe um nome para prosseguir com o cadastro.'} )
 name: string;
 
 @IsEmail()
