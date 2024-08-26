@@ -7,7 +7,7 @@ import { CreateStudentResponse, FindAllStudentsResponse, FindOneStudentResponse 
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @Post()
+  @Post('create')
   async create(@Body() createStudentDto: CreateStudentDto): Promise<CreateStudentResponse> {
     return this.studentService.create(createStudentDto);
   }

@@ -1,21 +1,27 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateTeacherDto } from '../dtos/teacher.dto';
 import { TeacherService } from './teacher.service';
+import { Teacher } from './teacher.entity';
 
 @Controller('teachers')
 export class TeacherController {
-    constructor(private readonly teacherService: TeacherService) {}
+  constructor(private readonly teacherService: TeacherService) {}
 
-@Post('create')
-createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
+  @Post('create')
+  createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
     return this.teacherService.createTeacher(createTeacherDto);
-}
+  }
 
-@Get()
-async getAllTeachers(
+  @Get()
+  async getAllTeachers(
     @Query('location') location: string,
-    @Query('theme') theme: string): Promise<CreateTeacherDto[]>{
-    const teachers = await this.teacherService.findAll(location, theme);
-    return teachers;
-    }
+    @Query('theme') theme: string,
+  ): Promise<Teacher[]> {
+    return this.teacherService.findAll(location, theme);
+  }
+
+  @Get(':id')
+  async getTeacherById(@Param('id') id: string): Promise<Teacher> {
+    return this.teacherService.findOne(id);
+  }
 }
