@@ -45,4 +45,4 @@ Exemplo de request:
   "availability": false,
   "created_at": "2024-08-24T15:23:00Z",
   "updated_at": "2024-08-24T10:00:00Z"
-}```
+}
