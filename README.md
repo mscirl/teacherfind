@@ -78,5 +78,7 @@ Exemplo de request:
     "JavaScript"
   ],
   "availability": true
+  "created_at": "2024-08-24T15:22:00Z",
+  "updated_at": "2024-08-24T23:00:00Z"
 }
 ```
