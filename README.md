@@ -32,7 +32,7 @@ Aplicação desenvolvida para facilitar o encontro entre pessoas professoras e p
 
 ### GET
 * Rota para consulta de todos os cadastros: **http://localhost:3000/teachers**
-* Rota para consulta com parâmetros de _'location'_ e _'theme'_, possibilitando encontrar o match por proximidade assunto/tema: **http://localhost:3000/teachers?location=95900680&theme=JavaScript**
+* Rota para consulta com parâmetros de _'location'_ e _'theme'_, possibilitando encontrar o match por proximidade e assunto/tema: **http://localhost:3000/teachers?location=95900680&theme=JavaScript**
 
 
 ### POST:
