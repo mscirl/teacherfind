@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Student } from './student.entity';
 import { StudentService } from './student.service';
 import { StudentController } from './student.controller';
+import { Teacher } from 'src/teacher/teacher.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Student])],
+  imports: [TypeOrmModule.forFeature([Student, Teacher])],
   providers: [StudentService],
   controllers: [StudentController],
 })

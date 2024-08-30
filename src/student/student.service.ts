@@ -1,13 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In, Raw } from 'typeorm';
 import { Student } from './student.entity';
 import { CreateStudentDto } from 'src/dtos/create-student.dto';
 import { CreateStudentResponse, FindAllStudentsResponse, FindOneStudentResponse } from './student.interface';
+import { Teacher } from 'src/teacher/teacher.entity';
 
 @Injectable()
 export class StudentService {
   constructor(
+    @InjectRepository(Teacher)
+    private readonly teacherRepository: Repository<Teacher>,
     @InjectRepository(Student)
     private studentRepository: Repository<Student>,
   ) {}
@@ -33,4 +36,58 @@ export class StudentService {
 
     return { message: 'Estudante encontrado!', student };
   }
+
+  async matchTeachers(
+    studentId: string,
+    maxDistance: number, // Distância máxima em quilômetros
+  ): Promise<Teacher[]> {
+    // Buscar os dados do aluno
+    const student = await this.studentRepository.findOne({ where: { id: studentId } });
+    if (!student) {
+      throw new Error(`Estudante com ID ${studentId} não encontrado.`);
+    }
+
+    // Buscar todos os professores que ensinam os interesses do aluno e estão disponíveis
+       const availableTeachers = await this.teacherRepository.find({
+      where: {
+        specialties: Raw((alias) => `${alias} && ARRAY[${student.interests.map(interest => `'${interest}'`).join(', ')}]::text[]`),
+        availability: true,
+      },
+    });
+      console.info('Professores disponíveis que ensinam o assunto:', availableTeachers);
+
+    const matchedTeachers = availableTeachers.filter((teacher) => {
+      if (teacher.latitude && teacher.longitude && student.latitude && student.longitude) {
+        const distance = this.calculateDistance(
+          student.latitude,
+          student.longitude,
+          teacher.latitude,
+          teacher.longitude,
+        );
+        return distance <= maxDistance;
+      }
+      return false;
+    });
+
+    return matchedTeachers;
+  }
+private calculateDistance(firstLatitude: number, firstLongitude: number, secondLatitude: number, secondLongitude: number): number {
+  const degreesPerRadian = 180;
+  const earthRadiusValueInKilometers = 6371;
+  const halfDivision = 2;
+  const completeUnit = 1;
+  const fullCircle = 2
+  const convertToRadians = (degree: number) => (degree * Math.PI) / degreesPerRadian;
+
+  const earthRadiusInKilometers = earthRadiusValueInKilometers; // Raio da Terra em quilômetros
+  const deltaLatitude = convertToRadians(secondLatitude - firstLatitude);
+  const deltaLongitude = convertToRadians(secondLongitude - firstLongitude);
+  const haversineComponent =
+    Math.sin(deltaLatitude / halfDivision) * Math.sin(deltaLatitude / halfDivision) +
+    Math.cos(convertToRadians(firstLatitude)) * Math.cos(convertToRadians(secondLatitude)) *
+    Math.sin(deltaLongitude / halfDivision) * Math.sin(deltaLongitude / halfDivision);
+  const centralAngle = fullCircle * Math.atan2(Math.sqrt(haversineComponent), Math.sqrt(completeUnit - haversineComponent));
+  return earthRadiusInKilometers * centralAngle; // Distância em quilômetros
+}
+
 }
