@@ -26,6 +26,8 @@ Aplicação desenvolvida para facilitar o encontro entre pessoas professoras e p
 * Implementação de sistema que permita que pessoas alunas agendem aulas, conforme agenda de docentes.
 * Pedido de review em pr's.
 
+<hr>
+
 ## Gerenciamento de pessoas professoras:
 
 ### GET
@@ -55,6 +57,7 @@ Exemplo de request:
 }
 ```
 
+<hr>
 
 ## Gerenciamento de pessoas alunas:
 
