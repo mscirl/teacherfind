@@ -23,8 +23,8 @@ Aplicação desenvolvida para facilitar o encontro entre pessoas professoras e p
 ## Funcionalidades secundárias:
 * Sistema de login;
 * Controle de cotas para pessoas de baixa renda, de escolas públicas, refugiados, etc.
-* Implementação de sistema que permita que pessoas alunas agendem aulas, conforme agenda de docentes.
-* Pedido de review em pr's.
+* Implementação de funcionalidade que permita que pessoas alunas agendem aulas, conforme agenda de docentes.
+* Pedidos de reviews em pr's.
 
 <hr>
 
