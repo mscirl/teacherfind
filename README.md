@@ -80,8 +80,3 @@ Exemplo de request:
   "availability": true
 }
 ```
-
-
-
-=======
->>>>>>> a348e9a (feat: adição de endpoints get e post para gerenciamento de professores #1)
