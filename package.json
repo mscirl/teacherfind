@@ -29,10 +29,7 @@
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-<<<<<<< HEAD
     "typeorm": "^0.3.20",
-=======
->>>>>>> bf286d9 (feat: ajuste nas validações e criação de um dto para retorno de mensagem clara do cadastro)
     "uuid": "^10.0.0"
   },
   "devDependencies": {
