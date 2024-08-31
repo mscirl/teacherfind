@@ -30,7 +30,7 @@ export class CreateTeacherDto {
   @IsArray()
   @IsString({ each: true })
   @IsNotEmpty({ message: 'Por favor, informe o(s) conteúdo(s) que deseja ministrar.' })
-  specialties: string[];
+  specialities: string[];
 
   @IsNotEmpty()
   availability: boolean;

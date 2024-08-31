@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from 'src/dtos/create-student.dto';
 import { CreateStudentResponse, FindAllStudentsResponse, FindOneStudentResponse } from './student.interface';
@@ -10,27 +10,68 @@ export class StudentController {
 
   @Post('create')
   async create(@Body() createStudentDto: CreateStudentDto): Promise<CreateStudentResponse> {
-    return this.studentService.create(createStudentDto);
+    try {
+      return await this.studentService.create(createStudentDto);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao criar o estudante',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Get()
-
   async findAll(): Promise<FindAllStudentsResponse> {
-    return this.studentService.findAll();
+    try {
+      return await this.studentService.findAll();
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao buscar todos os estudantes',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<FindOneStudentResponse> {
-    return this.studentService.findOne(id);
+    try {
+      return await this.studentService.findOne(id);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao buscar o estudante',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
+
   @Get(':id/match-teachers')
   async matchTeachers(
     @Param('id') studentId: string,
     @Query('maxDistance') maxDistance: number,
   ): Promise<Teacher[]> {
-    const matchedTeachers = await this.studentService.matchTeachers(studentId, maxDistance);
-    
-    // Retornar os dados diretamente na resposta HTTP
-    return matchedTeachers;
+    try {
+      return await this.studentService.matchTeachers(studentId, maxDistance);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao buscar professores correspondentes',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

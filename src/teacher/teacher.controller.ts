@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateTeacherDto } from '../dtos/create-teacher.dto';
 import { TeacherService } from './teacher.service';
 import { Teacher } from './teacher.entity';
@@ -8,8 +8,19 @@ export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}
 
   @Post('create')
-  createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
-    return this.teacherService.createTeacher(createTeacherDto);
+  async createTeacher(@Body() createTeacherDto: CreateTeacherDto) {
+    try {
+      return await this.teacherService.createTeacher(createTeacherDto);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao criar o professor',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Get()
@@ -17,11 +28,33 @@ export class TeacherController {
     @Query('location') location: string,
     @Query('theme') theme: string,
   ): Promise<Teacher[]> {
-    return this.teacherService.findAll(location, theme);
+    try {
+      return await this.teacherService.findAll(location, theme);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao buscar todos os professores',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Get(':id')
   async getTeacherById(@Param('id') id: string): Promise<Teacher> {
-    return this.teacherService.findOne(id);
+    try {
+      return await this.teacherService.findOne(id);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: `Erro ao buscar o professor com id ${id}`,
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
