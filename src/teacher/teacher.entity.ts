@@ -21,7 +21,7 @@ export class Teacher {
   description: string;
 
   @Column({ type: 'varchar', length: 9 })
-  cep: string;
+  zipCode: string;
 
   @Column('text', { array: true })
   specialities: string[];

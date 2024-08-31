@@ -25,7 +25,7 @@ export class CreateTeacherDto {
 
   @IsString()
   @IsNotEmpty()
-  cep: string;
+  zipCode: string;
 
   @IsArray()
   @IsString({ each: true })

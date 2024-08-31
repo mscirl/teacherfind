@@ -43,7 +43,7 @@ Exemplo de request:
   "password": "@#$123",
   "telefone": "+55 11 91234-5678",
   "description": "Professor de programação com 5 anos de experiência. Foco em Backend",
-  "cep": "95900-680",
+  "zipCode": "95900-680",
   "specialities": [
     "TypeScript",
     "SQL",
@@ -76,7 +76,7 @@ Exemplo de request:
   "password": "@#$1234",
   "telefone": "+55 11 91234-4444",
   "description": "Aluno de Engenharia de Software",
-  "cep": "95900-704",
+  "zipCode": "95900-704",
   "specialities": [
     "HTML",
     "SQL",

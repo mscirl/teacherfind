@@ -31,7 +31,7 @@ export class TeacherService {
   async findAll(location: string, theme: string): Promise<Teacher[]> {
     return this.teacherRepository.find({
       where: {
-        cep: location,
+        zipCode: location,
         specialities: theme,
       },
     });
