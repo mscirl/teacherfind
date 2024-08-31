@@ -18,7 +18,7 @@ Aplicação desenvolvida para facilitar o encontro entre pessoas professoras e p
 ## Principais funcionalidades:
 * Cadastro de pessoas professoras;
 * Cadastro de pessoas alunas;
-* Consultar quem ministra um conteúdo, podendo utilizar a filtragem de localização e assunto ou uma busca geral.
+* Busca de pessoas professoras disponíveis com base na localização e disciplina desejada, permitindo que se encontre um docente mais próximo possível, e/ou o mais adequado para o conteúdo.
 
 ## Funcionalidades secundárias:
 * Sistema de login;
@@ -29,11 +29,6 @@ Aplicação desenvolvida para facilitar o encontro entre pessoas professoras e p
 <hr>
 
 ## Gerenciamento de pessoas professoras:
-
-### GET
-* Rota para consulta de todos os cadastros: **http://localhost:3000/teachers**
-* Rota para consulta com parâmetros de _'location'_ e _'theme'_, possibilitando encontrar o match por proximidade e assunto/tema: **http://localhost:3000/teachers?location=95900680&theme=JavaScript**
-
 
 ### POST:
 * Rota: **http://localhost:3000/teachers/create**
@@ -57,12 +52,15 @@ Exemplo de request:
 }
 ```
 
+
+### GET
+* Rota para consulta de todos os cadastros: **http://localhost:3000/teachers**
+* Rota para consulta com parâmetros de _'location'_ e _'theme'_, possibilitando encontrar o match por proximidade e assunto/tema: **http://localhost:3000/teachers?location=95900680&theme=JavaScript**
+
+
 <hr>
 
 ## Gerenciamento de pessoas alunas:
-
-### GET
-* Rota para consulta de todos os cadastros: **http://localhost:3000/students**
 
 ## POST
 * Rota: **http://localhost:3000/students**
@@ -85,3 +83,7 @@ Exemplo de request:
   "updated_at": "2024-08-24T23:00:00Z"
 }
 ```
+
+
+### GET
+* Rota para consulta de todos os cadastros: **http://localhost:3000/students**
