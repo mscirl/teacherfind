@@ -24,7 +24,7 @@ export class Teacher {
   cep: string;
 
   @Column('text', { array: true })
-  specialties: string[];
+  specialities: string[];
 
   @Column({ type: 'boolean' })
   availability: boolean;

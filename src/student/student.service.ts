@@ -51,7 +51,7 @@ export class StudentService {
     // Buscar todos os professores que ensinam os interesses do aluno e estão disponíveis
        const availableTeachers = await this.teacherRepository.find({
       where: {
-        specialties: Raw((alias) => `${alias} && ARRAY[${student.interests.map(interest => `'${interest}'`).join(', ')}]::text[]`),
+        specialities: Raw((alias) => `${alias} && ARRAY[${student.interests.map(interest => `'${interest}'`).join(', ')}]::text[]`),
         availability: true,
       },
     });

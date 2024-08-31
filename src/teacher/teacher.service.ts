@@ -32,7 +32,7 @@ export class TeacherService {
     return this.teacherRepository.find({
       where: {
         cep: location,
-        specialties: theme,
+        specialities: theme,
       },
     });
   }
