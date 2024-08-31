@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Teacher } from './teacher.entity';
-import { CreateTeacherDto } from '../dtos/teacher.dto';
+import { CreateTeacherDto } from '../dtos/create-teacher.dto';
 import { SucessResponseApi } from 'src/dtos/responses.dto';
 
 @Injectable()

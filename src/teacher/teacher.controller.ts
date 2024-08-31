@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { CreateTeacherDto } from '../dtos/teacher.dto';
+import { CreateTeacherDto } from '../dtos/create-teacher.dto';
 import { TeacherService } from './teacher.service';
 import { Teacher } from './teacher.entity';
 
