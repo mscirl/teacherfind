@@ -9,7 +9,6 @@ async function bootstrap() {
     .setTitle('TeacherFind')
     .setDescription('API de match para facilitar o encontro entre professores qualificados e alunos que buscam aulas em determinados assuntos. ODS 4: Educação de Qualidade')
     .setVersion('1.0')
-    .addTag('cats')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
