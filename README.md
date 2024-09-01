@@ -42,7 +42,7 @@ Exemplo de request:
   "name": "Ana Paula Costa",
   "mail": "anapaula.costa@example.com",
   "password": "P@ssw0rd123",
-  "telefone": "+55 21 91234-5678",
+  "phone": "+55 21 91234-5678",
   "description": "Professora de Data Science com foco em Machine Learning e Python.",
   "zipCode": "20040-020",
   "specialities": [

@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post, Query, HttpException, HttpStatus } from '@nestjs/common';
+import { Body, Controller, Get, Delete, Param, Post, Query, HttpException, HttpStatus, Put } from '@nestjs/common';
 import { CreateTeacherDto } from '../dtos/create-teacher.dto';
 import { TeacherService } from './teacher.service';
 import { Teacher } from './teacher.entity';
+import { UpdateTeacherDto } from 'src/dtos/update-teacher.dto';
+import { SucessResponseApi } from 'src/dtos/responses.dto';
 
 @Controller('teachers')
 export class TeacherController {
@@ -52,6 +54,41 @@ export class TeacherController {
         {
           status: HttpStatus.INTERNAL_SERVER_ERROR,
           error: `Erro ao buscar o professor com id ${id}`,
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateTeacherDto: UpdateTeacherDto,
+  ): Promise<SucessResponseApi<Teacher>> {
+    try {
+      return await this.teacherService.update(id, updateTeacherDto);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: `Erro ao atualizar o professor(a) de ID ${id}`,
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<{ message: string }> {
+    try {
+      return await this.teacherService.delete(id);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: `Erro ao remover o professor(a) de ID ${id}`,
           message: error.message,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
