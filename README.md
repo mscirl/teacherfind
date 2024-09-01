@@ -50,9 +50,7 @@ Exemplo de request:
     "Network Security",
     "Penetration Testing"
   ],
-  "availability": false,
-  "created_at": "2024-02-14T10:00:00Z",
-  "updated_at": "2024-08-12T09:30:00Z"
+  "availability": true
 }
 
 ```
