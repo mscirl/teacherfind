@@ -38,21 +38,22 @@ Aplicação desenvolvida para facilitar o encontro entre pessoas professoras e p
 Exemplo de request:
 
 ```{
-  "name": "João Matheus Borges",
-  "mail": "joaomatheus@example.com",
-  "password": "@#$123",
-  "telefone": "+55 11 91234-5678",
-  "description": "Professor de programação com 5 anos de experiência. Foco em Backend",
-  "zipCode": "95900-680",
+{
+  "name": "Ana Paula Costa",
+  "mail": "anapaula.costa@example.com",
+  "password": "P@ssw0rd123",
+  "telefone": "+55 21 91234-5678",
+  "description": "Professora de Data Science com foco em Machine Learning e Python.",
+  "zipCode": "20040-020",
   "specialities": [
-    "TypeScript",
-    "SQL",
-    "JavaScript"
+    "Python",
+    "Machine Learning",
+    "Data Science"
   ],
-  "availability": false,
-  "created_at": "2024-08-24T15:23:00Z",
-  "updated_at": "2024-08-24T10:00:00Z"
+  "availability": true
 }
+
+
 ```
 
 ### GET
@@ -71,20 +72,15 @@ Exemplo de request:
 Exemplo de request:
 
 ```{
-  "name": "Lucas Silva",
-  "mail": "lucass@example.com",
-  "password": "@#$1234",
-  "telefone": "+55 11 91234-4444",
-  "description": "Aluno de Engenharia de Software",
-  "zipCode": "95900-704",
-  "specialities": [
-    "HTML",
-    "SQL",
-    "JavaScript"
-  ],
-  "availability": true
-  "created_at": "2024-08-24T15:22:00Z",
-  "updated_at": "2024-08-24T23:00:00Z"
+{
+  "name": "Ana Pereira",
+  "email": "ana.pereira@example.com",
+  "zipCode": "29101567",
+  "password": "anaSenhaSegura321",
+  "latitude": -20.3445,
+  "longitude": -40.2958,
+  "phone": "+55279912345678",
+  "interests": ["Python", "Django", "Data Science"]
 }
 ```
 
