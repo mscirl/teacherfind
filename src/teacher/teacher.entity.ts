@@ -9,7 +9,7 @@ export class Teacher {
   name: string;
 
   @Column({ type: 'varchar', length: 100 })
-  mail: string;
+  email: string;
 
   @Column({ type: 'varchar', length: 100 })
   password: string;

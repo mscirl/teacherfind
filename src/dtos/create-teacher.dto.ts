@@ -10,7 +10,7 @@ export class CreateTeacherDto {
   @ApiProperty({example: 'anapaula.costa@example.com'})
   @IsEmail()
   @IsNotEmpty()
-  mail: string;
+  email: string;
 
   @ApiProperty({example: 'P@ula321'})
   @IsString()
