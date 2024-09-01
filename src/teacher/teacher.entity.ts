@@ -15,7 +15,7 @@ export class Teacher {
   password: string;
 
   @Column({ type: 'varchar', length: 20 })
-  telefone: string;
+  phone: string;
 
   @Column({ type: 'varchar', length: 120 })
   description: string;
