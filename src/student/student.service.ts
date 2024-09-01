@@ -7,6 +7,7 @@ import { CreateStudentResponse, FindAllStudentsResponse, FindOneStudentResponse 
 import { Teacher } from 'src/teacher/teacher.entity';
 import { calculateDistance } from 'src/utils/utils';
 import { UpdateStudentDto } from 'src/dtos/update-student.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class StudentService {
@@ -17,9 +18,17 @@ export class StudentService {
     private studentRepository: Repository<Student>,
   ) {}
 
-  async create(createStudentDto: CreateStudentDto): Promise<CreateStudentResponse> {
-    const student = this.studentRepository.create(createStudentDto);
+async create(createStudentDto: CreateStudentDto): Promise<CreateStudentResponse> {
+    const hashedPassword = await bcrypt.hash(createStudentDto.password, 10);
+
+    // Cria objeto do estudante, substituindo a senha pelo hash
+    const student = this.studentRepository.create({
+      ...createStudentDto,
+      password: hashedPassword,
+    });
+
     await this.studentRepository.save(student);
+
     return { message: 'Estudante criado com sucesso!', student };
   }
 
@@ -60,7 +69,7 @@ async delete(id: string): Promise<{ message: string }> {
   }
 
   await this.studentRepository.delete(id);
-  return { message: 'Estudante removido com sucesso!' };
+  return { message: `Estudante com ID ${id} removido com sucesso` };
 }
 
 
