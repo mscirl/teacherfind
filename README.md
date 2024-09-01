@@ -50,9 +50,10 @@ Exemplo de request:
     "Machine Learning",
     "Data Science"
   ],
-  "availability": true
+  "availability": true,
+	"latitude": "-20.34900000",
+	"longitude": "-40.29340000"
 }
-
 
 ```
 
