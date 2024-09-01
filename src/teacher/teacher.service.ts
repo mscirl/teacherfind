@@ -5,6 +5,7 @@ import { Teacher } from './teacher.entity';
 import { CreateTeacherDto } from '../dtos/create-teacher.dto';
 import { SucessResponseApi } from 'src/dtos/responses.dto';
 import { UpdateTeacherDto } from 'src/dtos/update-teacher.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class TeacherService {
@@ -15,10 +16,14 @@ export class TeacherService {
 
   async createTeacher(createTeacherDto: CreateTeacherDto): Promise<SucessResponseApi<Teacher>> {
     const timestamp = new Date().toISOString();
+    
+    const hashedPassword = await bcrypt.hash(createTeacherDto.password, 10);
+
+    // Criar o objeto de professores, substituindo a senha pelo hash
     const newTeacher = this.teacherRepository.create({
       ...createTeacherDto,
+      password: hashedPassword,
       createdAt: timestamp, 
-      updatedAt: timestamp,
     });
 
     const savedTeacher = await this.teacherRepository.save(newTeacher);
@@ -59,12 +64,11 @@ async findAll(location: string, theme: string): Promise<{ message: string; teach
     return teacher;
   }
 
-   // Método de atualização
   async update(id: string, updateTeacherDto: UpdateTeacherDto): Promise<SucessResponseApi<Teacher>> {
     const teacher = await this.teacherRepository.findOne({ where: { id } });
 
     if (!teacher) {
-      throw new NotFoundException(`Professor com ID ${id} não encontrado`);
+      throw new NotFoundException(`Professor(a) com ID ${id} não encontrado`);
     }
 
     const updatedTimestamp = new Date().toISOString();
@@ -74,22 +78,21 @@ async findAll(location: string, theme: string): Promise<{ message: string; teach
 
     return {
       data: updatedTeacher,
-      message: `Cadastro do professor ${updatedTeacher.name} atualizado com sucesso!`,
+      message: `Cadastro de professor(a) ${updatedTeacher.name} atualizado com sucesso!`,
     };
   }
 
-  // Método de remoção
   async delete(id: string): Promise<{ message: string }> {
     const teacher = await this.teacherRepository.findOne({ where: { id } });
 
     if (!teacher) {
-      throw new NotFoundException(`Professor com ID ${id} não encontrado`);
+      throw new NotFoundException(`Professor(a) com ID ${id} não encontrado`);
     }
 
     await this.teacherRepository.delete(id);
 
     return {
-      message: `Professor com ID ${id} removido com sucesso!`,
+      message: `Professor(a) com ID ${id} removido com sucesso!`,
     };
   }
   

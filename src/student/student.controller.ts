@@ -33,7 +33,7 @@ export class StudentController {
       throw new HttpException(
         {
           status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: 'Erro ao buscar todos os estudantes',
+          error: 'Erro ao buscar estudantes',
           message: error.message,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -49,7 +49,7 @@ export class StudentController {
       throw new HttpException(
         {
           status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: 'Erro ao buscar o estudante',
+          error: `Erro ao buscar o estudante de ID ${id} `,
           message: error.message,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -69,7 +69,7 @@ export class StudentController {
       throw new HttpException(
         {
           status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: 'Erro ao atualizar o estudante',
+          error: `Erro ao atualizar o estudante de ID ${id}`,
           message: error.message,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
