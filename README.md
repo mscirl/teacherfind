@@ -39,19 +39,20 @@ Exemplo de request:
 
 ```{
 {
-  "name": "Fernanda Souza",
-  "mail": "fernanda.souza@example.com",
-  "password": "F3rnanda@456",
-  "telefone": "+55 48 92345-6789",
-  "description": "Professora de Segurança da Informação com 12 anos de experiência.",
-  "zipCode": "88034-001",
+  "name": "Ana Paula Costa",
+  "mail": "anapaula.costa@example.com",
+  "password": "P@ssw0rd123",
+  "telefone": "+55 21 91234-5678",
+  "description": "Professora de Data Science com foco em Machine Learning e Python.",
+  "zipCode": "20040-020",
   "specialities": [
-    "Cybersecurity",
-    "Network Security",
-    "Penetration Testing"
+    "Python",
+    "Machine Learning",
+    "Data Science"
   ],
   "availability": true
 }
+
 
 ```
 
