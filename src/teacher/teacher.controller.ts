@@ -25,22 +25,23 @@ export class TeacherController {
 
   @Get()
   async getAllTeachers(
-    @Query('location') location: string,
-    @Query('theme') theme: string,
-  ): Promise<Teacher[]> {
-    try {
-      return await this.teacherService.findAll(location, theme);
-    } catch (error) {
-      throw new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: 'Erro ao buscar todos os professores',
-          message: error.message,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+  @Query('location') location: string,
+  @Query('theme') theme: string,
+): Promise<{ message: string; teachers: Teacher[]; count: number }> {
+  try {
+    return await this.teacherService.findAll(location, theme);
+  } catch (error) {
+    throw new HttpException(
+      {
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: 'Erro ao buscar professores',
+        message: error.message,
+      },
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
+}
+
 
   @Get(':id')
   async getTeacherById(@Param('id') id: string): Promise<Teacher> {

@@ -1,8 +1,9 @@
-import { Controller, Post, Body, Get, Param, Query, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete, Query, HttpException, HttpStatus, Put } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from 'src/dtos/create-student.dto';
 import { CreateStudentResponse, FindAllStudentsResponse, FindOneStudentResponse } from './student.interface';
 import { Teacher } from 'src/teacher/teacher.entity';
+import { UpdateStudentDto } from 'src/dtos/update-student.dto';
 
 @Controller('students')
 export class StudentController {
@@ -49,6 +50,42 @@ export class StudentController {
         {
           status: HttpStatus.INTERNAL_SERVER_ERROR,
           error: 'Erro ao buscar o estudante',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+  
+ 
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateStudentDto: UpdateStudentDto,
+  ): Promise<FindOneStudentResponse> {
+    try {
+      return await this.studentService.update(id, updateStudentDto);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao atualizar o estudante',
+          message: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<{ message: string }> {
+    try {
+      return await this.studentService.delete(id);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Erro ao remover o estudante',
           message: error.message,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,

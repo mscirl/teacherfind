@@ -1,11 +1,36 @@
+import { IsString, IsEmail, IsOptional, IsNumber, Length, IsArray, IsUUID } from 'class-validator';
+
 export class CreateStudentDto {
-  readonly id: string;
-  readonly name: string;
-  readonly email: string;
-  readonly zipCode: string;
-  readonly password: string;
-  readonly latitude?: number;
-  readonly longitude?: number;
-  readonly phone: string;
-  readonly interests: string[];
+  id: string;
+
+  @IsString()
+  @Length(2, 100)
+  name: string;
+
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @Length(8, 8)
+  zipCode: string;
+
+  @IsString()
+  @Length(6, 100)
+  password: string;
+
+  @IsOptional()
+  @IsNumber()
+  latitude?: number;
+
+  @IsOptional()
+  @IsNumber()
+  longitude?: number;
+
+  @IsString()
+  @Length(10, 15)
+  phone: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  interests: string[];
 }
